@@ -1,4 +1,4 @@
 /.idea
-/database/
+/database
 /database.tar.xz
 /ogb_container/
