@@ -68,3 +68,14 @@ $docker (user)# python db_setup/manage_ogb.py import-pathway-maps
 ```
 
 Congratulations, OpenGenomeBrowser is ready! (Example: https://localhost/pathway/?map=kegg-00400&genomes=@tax:root)
+
+## Get ready for production
+
+- Replace the certificates in `nginx/certs` with proper ones
+- Adapt `nginx/nginx.conf` appropriately
+- Change the `production-template.env`:
+  - add your own `DJANGO_SECRET_KEY` (generate one using bash: `$(date | sha256sum | base64 | head -c 60)`)
+  - change `DJANGO_ALLOWED_HOSTS` to your domain (e.g. opengenomebrowser.bioinformatics.unibe.ch)
+  - ensure `USER_ID` and `GROUP_ID` are correct. It mostly influences the permissions a file created by OpenGenomeBrowser will have. This is the command to get the current users uid/gid: `id -u`/`id -g`.
+  
+  
