@@ -34,9 +34,9 @@ docker-compose -f production-template.yaml up
 
 Open https://localhost/, ignore the self-signed certificate, and you should see the welcome page!
 
-## Create superuser
+## Open a terminal in the container
 
-In a seperate terminal, run
+In a seperate terminal, run:
 
 ```bash
 # open terminal in docker-container
@@ -45,7 +45,13 @@ docker exec -ti opengenomebrowser_web bash
 # log in as user
 $docker (root)# sudo -u user --preserve-env bash
 $docker (user)# cd /opengenomebrowser/
+```
 
+## Create superuser
+
+In the terminal from before, run:
+
+```bash
 # create django administrator account
 $docker (user)# python manage.py createsuperuser
 ```
