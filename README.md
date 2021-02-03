@@ -73,7 +73,7 @@ $docker (user)# python db_setup/manage_ogb.py import-orthologs
 $docker (user)# python db_setup/manage_ogb.py import-pathway-maps
 ```
 
-Congratulations, OpenGenomeBrowser is ready! (Example: https://localhost/pathway/?map=kegg-00400&genomes=@tax:root)
+Congratulations, OpenGenomeBrowser is ready! (Example: https://localhost/pathway/?map=kegg-ko00400&g1=@tax:root)
 
 ## Get ready for production
 
