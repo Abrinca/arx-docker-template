@@ -13,6 +13,8 @@ Get OpenGenomeBrowser running in 10 minutes!
 - [docker](https://docs.docker.com/get-docker/)
 - [docker-compose](https://docs.docker.com/compose/install/)
 
+Note: ensure you have a **current** version of docker! System repositories tend to be out of date!
+
 ## Clone this repo
 
 ```bash
