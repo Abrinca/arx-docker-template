@@ -75,12 +75,12 @@ $docker (user)# python db_setup/manage_ogb.py import-orthologs
 $docker (user)# python db_setup/manage_ogb.py import-pathway-maps
 ```
 
-Congratulations, OpenGenomeBrowser is ready! (Example: https://localhost/pathway/?map=kegg-ko00400&g1=@tax:root)
+Congratulations, OpenGenomeBrowser is ready! (Example: https://localhost/pathway/?map=kornec00400&g1=@tax:root)
 
 ## Get ready for production
 
 - Replace the certificates in `nginx/certs` with proper ones
-- Adapt `nginx/nginx.conf` appropriately
+- Adapt `nginx/nginx.conf` accordingly
 - Change the `production-template.env`:
   - add your own `DJANGO_SECRET_KEY` (generate one using bash: `$(date | sha256sum | base64 | head -c 60)`)
   - change `DJANGO_ALLOWED_HOSTS` to your domain (e.g. opengenomebrowser.bioinformatics.unibe.ch)
