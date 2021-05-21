@@ -24,6 +24,7 @@ services:
       - ./database:/database
       - ./ogb_container/socket:/socket
       - ./ogb_container/static_root:/opengenomebrowser/static_root
+      - ./ogb_container/cache:/tmp/ogb-cache
 
 
   web:
