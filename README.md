@@ -46,7 +46,6 @@ docker exec -ti opengenomebrowser_web bash
 
 # log in as user
 $docker (root)# sudo -u user --preserve-env bash
-$docker (user)# cd /opengenomebrowser/
 ```
 
 ## Create superuser
