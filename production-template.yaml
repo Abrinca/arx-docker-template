@@ -21,7 +21,7 @@ services:
       - "80:80"
     volumes:
       - ./nginx/certs:/certs
-      - ./database:/database
+      - ./folder_structure:/folder_structure
       - ./ogb_container/socket:/socket
       - ./ogb_container/static_root:/opengenomebrowser/static_root
       - ./ogb_container/cache:/tmp/ogb-cache
@@ -34,7 +34,7 @@ services:
       - production-template.env
     command: /opengenomebrowser/init.sh
     volumes:
-      - ./database:/database
+      - ./folder_structure:/folder_structure
       - ./ogb_container/socket:/socket
       - ./ogb_container/static_root:/opengenomebrowser/static_root
       - ./ogb_container/cache:/tmp/ogb-cache
