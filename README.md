@@ -8,4 +8,4 @@ This repository contains a docker-compose setup that combines
 
 ## How to use it?
 
-Read the instructions [here](https://opengenomebrowser.github.io/opengenomebrowser/installation.html).
+Read the instructions [here](https://opengenomebrowser.github.io/installation.html).
