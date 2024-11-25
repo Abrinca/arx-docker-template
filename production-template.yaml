@@ -28,7 +28,7 @@ services:
 
 
   web:
-    image: opengenomebrowser/opengenomebrowser:latest
+    image: docker.abrinca.com/opengenomebrowser:latest
     container_name: opengenomebrowser_web
     env_file:
       - production-template.env
