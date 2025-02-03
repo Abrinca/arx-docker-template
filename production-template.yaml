@@ -18,8 +18,8 @@ services:
     build: ./nginx
     container_name: opengenomebrowser_nginx
     ports:
-      - "443:443"
-      - "80:80"
+      - "4443:443"
+      - "8080:80"
     volumes:
       - ./nginx/certs:/certs:z
       - ./folder_structure:/folder_structure:z
@@ -37,7 +37,7 @@ services:
     volumes:
       - ./ogb_container/socket:/socket:z
       - ./folder_structure:/folder_structure:z
-      - ./:/opengenomebrowser/:z
+      - ./ogb_container/static_root:/opengenomebrowser/static_root:z
       - ./ogb_container/cache:/tmp/ogb-cache:z
     depends_on:
       - db
