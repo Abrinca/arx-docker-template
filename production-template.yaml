@@ -10,7 +10,8 @@ services:
       - POSTGRES_PASSWORD=postgres
       - PGDATA=/pg_data
     volumes:
-      - ./ogb_container/pg_data:/pg_data
+      - ./ogb_container/pg_data:/pg_data:z
+      - ./ogb_container/db_backups:/var/lib/db_backups:z
 
 
   nginx:
@@ -20,11 +21,11 @@ services:
       - "443:443"
       - "80:80"
     volumes:
-      - ./nginx/certs:/certs
-      - ./folder_structure:/folder_structure
-      - ./ogb_container/socket:/socket
-      - ./ogb_container/static_root:/opengenomebrowser/static_root
-      - ./ogb_container/cache:/tmp/ogb-cache
+      - ./nginx/certs:/certs:z
+      - ./folder_structure:/folder_structure:z
+      - ./ogb_container/socket:/socket:z
+      - ./ogb_container/static_root:/opengenomebrowser/static_root:z
+      - ./ogb_container/cache:/tmp/ogb-cache:z
 
 
   web:
@@ -34,10 +35,10 @@ services:
       - production-template.env
     command: /opengenomebrowser/init.sh
     volumes:
-      - ./folder_structure:/folder_structure
-      - ./ogb_container/socket:/socket
-      - ./ogb_container/static_root:/opengenomebrowser/static_root
-      - ./ogb_container/cache:/tmp/ogb-cache
+      - ./ogb_container/socket:/socket:z
+      - ./folder_structure:/folder_structure:z
+      - ./:/opengenomebrowser/:z
+      - ./ogb_container/cache:/tmp/ogb-cache:z
     depends_on:
       - db
       - nginx
