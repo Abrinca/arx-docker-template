@@ -10,7 +10,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - PGDATA=/pg_data
     volumes:
-      - ./ogb_container/pg_data:/pg_data:U,z
+      - ./ogb_container/pg_data:/pg_data:Z
 
   nginx:
     build: ./nginx
@@ -19,11 +19,11 @@ services:
       - "4443:4443"
       - "8080:8080"
     volumes:
-      - ./nginx/certs:/certs:z
-      - ./folder_structure:/folder_structure:U,z
-      - ./ogb_container/static_root:/opengenomebrowser/static_root:U,z
-      - ./ogb_container/cache:/tmp/ogb-cache:U,z
-      - ./ogb_socket:/socket:U,z
+      - ./nginx/certs:/certs:Z
+      - ./folder_structure:/folder_structure:z
+      - ./ogb_container/static_root:/opengenomebrowser/static_root:z
+      - ./ogb_container/cache:/tmp/ogb-cache:z
+      - ./ogb_socket:/socket:z
 
   web:
     image: docker.abrinca.com/opengenomebrowser:latest
@@ -31,13 +31,12 @@ services:
     env_file:
       - production-template.env
     command: /opengenomebrowser/init.sh
-    userns_mode: keep-id
     volumes:
-      - ./folder_structure:/folder_structure:U,z
-      - ./ogb_container/static_root:/opengenomebrowser/static_root:U,z
-      - ./ogb_container/cache:/tmp/ogb-cache:U,z
-      - ./ogb_container/db_backups:/var/lib/db_backups:U,z
-      - ./ogb_socket:/socket:U,z
+      - ./folder_structure:/folder_structure:z
+      - ./ogb_container/static_root:/opengenomebrowser/static_root:z
+      - ./ogb_container/cache:/tmp/ogb-cache:z
+      - ./ogb_container/db_backups:/var/lib/db_backups:Z
+      - ./ogb_socket:/socket:z
     depends_on:
       - db
       - nginx
