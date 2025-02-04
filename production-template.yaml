@@ -12,21 +12,18 @@ services:
     volumes:
       - ./ogb_container/pg_data:/pg_data:U,z
 
-
   nginx:
     build: ./nginx
     container_name: opengenomebrowser_nginx
-    userns_mode: keep-id    
     ports:
-      - "4443:443"
-      - "8080:80"
+      - "4443:4443"
+      - "8080:8080"
     volumes:
       - ./nginx/certs:/certs:z
       - ./folder_structure:/folder_structure:U,z
-      - ./ogb_container/socket:/socket:U,z
       - ./ogb_container/static_root:/opengenomebrowser/static_root:U,z
       - ./ogb_container/cache:/tmp/ogb-cache:U,z
-
+      - ./ogb_socket:/socket:U,z
 
   web:
     image: docker.abrinca.com/opengenomebrowser:latest
@@ -36,11 +33,11 @@ services:
     command: /opengenomebrowser/init.sh
     userns_mode: keep-id
     volumes:
-      - ./ogb_container/socket:/socket:U,z
       - ./folder_structure:/folder_structure:U,z
       - ./ogb_container/static_root:/opengenomebrowser/static_root:U,z
       - ./ogb_container/cache:/tmp/ogb-cache:U,z
       - ./ogb_container/db_backups:/var/lib/db_backups:U,z
+      - ./ogb_socket:/socket:U,z
     depends_on:
       - db
       - nginx
