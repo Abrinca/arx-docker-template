@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   db:
-    image: postgres
+    image: postgres:16
     container_name: opengenomebrowser_postgres
     environment:
       - POSTGRES_DB=opengenomebrowser_db
@@ -10,22 +10,22 @@ services:
       - POSTGRES_PASSWORD=postgres
       - PGDATA=/pg_data
     volumes:
-      - ./ogb_container/pg_data:/pg_data:z
-      - ./ogb_container/db_backups:/var/lib/db_backups:z
+      - ./ogb_container/pg_data:/pg_data:U,z
 
 
   nginx:
     build: ./nginx
     container_name: opengenomebrowser_nginx
+    userns_mode: keep-id    
     ports:
       - "4443:443"
       - "8080:80"
     volumes:
       - ./nginx/certs:/certs:z
-      - ./folder_structure:/folder_structure:z
-      - ./ogb_container/socket:/socket:z
-      - ./ogb_container/static_root:/opengenomebrowser/static_root:z
-      - ./ogb_container/cache:/tmp/ogb-cache:z
+      - ./folder_structure:/folder_structure:U,z
+      - ./ogb_container/socket:/socket:U,z
+      - ./ogb_container/static_root:/opengenomebrowser/static_root:U,z
+      - ./ogb_container/cache:/tmp/ogb-cache:U,z
 
 
   web:
@@ -34,11 +34,13 @@ services:
     env_file:
       - production-template.env
     command: /opengenomebrowser/init.sh
+    userns_mode: keep-id
     volumes:
-      - ./ogb_container/socket:/socket:z
-      - ./folder_structure:/folder_structure:z
-      - ./ogb_container/static_root:/opengenomebrowser/static_root:z
-      - ./ogb_container/cache:/tmp/ogb-cache:z
+      - ./ogb_container/socket:/socket:U,z
+      - ./folder_structure:/folder_structure:U,z
+      - ./ogb_container/static_root:/opengenomebrowser/static_root:U,z
+      - ./ogb_container/cache:/tmp/ogb-cache:U,z
+      - ./ogb_container/db_backups:/var/lib/db_backups:U,z
     depends_on:
       - db
       - nginx
