@@ -1,42 +1,22 @@
-version: "3.9"
-
 services:
-  db:
-    image: postgres
-    container_name: opengenomebrowser_postgres
+  opengenomebrowser:
+    build:
+      context: .
+      dockerfile: Dockerfile 
+    env_file:
+      - production.env
+    container_name: opengenomebrowser
     environment:
       - POSTGRES_DB=opengenomebrowser_db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - PGDATA=/pg_data
-    volumes:
-      - ./ogb_container/pg_data:/pg_data:Z
-
-  nginx:
-    build: ./nginx
-    container_name: opengenomebrowser_nginx
     ports:
-      - "4443:4443"
-      - "8080:8080"
+      - "8080:8080"   # nginx (HTTP)
+      - "4443:4443"   # nginx (HTTPS)
     volumes:
-      - ./nginx/certs:/certs:Z
-      - ./folder_structure:/folder_structure:z
-      - ./ogb_container/static_root:/opengenomebrowser/static_root:z
-      - ./ogb_container/cache:/tmp/ogb-cache:z
-      - ./ogb_socket:/socket:z
-
-  web:
-    image: docker.abrinca.com/opengenomebrowser:latest
-    container_name: opengenomebrowser_web
-    env_file:
-      - production-template.env
-    command: /opengenomebrowser/init.sh
-    volumes:
-      - ./folder_structure:/folder_structure:z
-      - ./ogb_container/static_root:/opengenomebrowser/static_root:z
-      - ./ogb_container/cache:/tmp/ogb-cache:z
-      - ./ogb_container/db_backups:/var/lib/db_backups:Z
-      - ./ogb_socket:/socket:z
-    depends_on:
-      - db
-      - nginx
+      # PostgreSQL data
+      - ./ogb_container/pg_data:/pg_data
+      - ./folder_structure:/folder_structure
+      # Bin, Logs etc.
+      - ./ogb_container/ogb_data:/ogb_data
