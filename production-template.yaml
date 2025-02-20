@@ -1,6 +1,6 @@
 services:
   opengenomebrowser:
-    image: docker.abrinca.com/opengenomebrowser 
+    image: docker.abrinca.com/opengenomebrowser:latest
     env_file:
       - production-template.env
     container_name: opengenomebrowser
@@ -8,13 +8,9 @@ services:
       - POSTGRES_DB=opengenomebrowser_db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - PGDATA=/pg_data
+      - PGDATA=/data/postgres
     ports:
       - "8080:8080"   # nginx (HTTP)
       - "4443:4443"   # nginx (HTTPS)
     volumes:
-      # PostgreSQL data
-      - ./ogb_container/pg_data:/pg_data:Z
-      - ./folder_structure:/folder_structure:Z
-      # Bin, Logs etc.
-      - ./ogb_container/ogb_data:/ogb_data:Z
+      - ./ogb_container:/data

@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:17
+    container_name: opengenomebrowser_postgres
+    environment:
+      - POSTGRES_DB=opengenomebrowser_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA=/data/postgres
+    volumes:
+      - ./ogb_container:/data
+  nginx:
+    image: nginx:latest
+    container_name: opengenomebrowser_nginx
+    ports:
+      - "4443:443"
+      - "8080:80"
+    volumes:
+      - ./ogb_container:/data
+  opengenomebrowser:
+    image: docker.abrinca.com/opengenomebrowser:latest
+    env_file:
+      - multi-service.env
+    container_name: opengenomebrowser_web
+    volumes:
+      - ./ogb_container:/data
