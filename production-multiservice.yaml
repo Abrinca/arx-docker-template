@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:17
+    container_name: opengenomebrowser_postgres
+    environment:
+      - POSTGRES_DB=opengenomebrowser_db
+      - POSTGRES_USER=ogb-username
+      - POSTGRES_PASSWORD=ogb-password
+      - PGDATA=/data/postgres
+    volumes:
+      - ./ogb_container:/data:z
+
+  opengenomebrowser:
+    depends_on:
+      - db
+    image: docker.abrinca.com/opengenomebrowser:latest
+    environment:
+      - RUN_NGINX=false
+      - RUN_POSTGRES=false
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=opengenomebrowser_db
+      - DB_USER=ogb-username
+      - DB_PASSWORD=ogb-password
+    env_file:
+      - production.env
+    container_name: opengenomebrowser_web
+    volumes:
+      - ./ogb_container:/data:z
+
+  nginx:
+    depends_on:
+      - opengenomebrowser
+    build: ./ogb_container/nginx
+    container_name: opengenomebrowser_nginx
+    ports:
+      - 4443:4443
+      - 8080:8080
+    volumes:
+      - ./ogb_container:/data:z

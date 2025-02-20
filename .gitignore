@@ -3,3 +3,11 @@
 /database
 /database.tar.xz
 /folder_structure.tar.xz
+/ogb_container/bin
+/ogb_container/huey
+/ogb_container/cache
+/ogb_container/postgres
+/ogb_container/taxonomy
+/ogb_container/static_root
+/ogb_container/folder_structure
+/ogb_container/*.sock
