@@ -7,7 +7,7 @@ else
   echo "Download demo folder_structure..."
   curl https://cloud.bioinformatics.unibe.ch/index.php/s/HEXfpEcNSQk4jP2/download/folder_structure.tar.xz -o folder_structure.tar.xz
   echo "Unpack demo folder_structure"
-  tar -xf folder_structure.tar.xz
+  tar -xf folder_structure.tar.xz -C ./ogb_container/
   rm folder_structure.tar.xz
 fi
 
