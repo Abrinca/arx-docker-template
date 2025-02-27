@@ -17,11 +17,11 @@ services:
     environment:
       - RUN_NGINX=false
       - RUN_POSTGRES=false
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_NAME=opengenomebrowser_db
-      - DB_USER=ogb-username
-      - DB_PASSWORD=ogb-password
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=opengenomebrowser_db
+      - POSTGRES_USER=ogb-username
+      - POSTGRES_PASSWORD=ogb-password
     env_file:
       - production.env
     container_name: opengenomebrowser_web
