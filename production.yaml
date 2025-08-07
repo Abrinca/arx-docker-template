@@ -1,11 +1,11 @@
 services:
-  opengenomebrowser:
-    image: docker.abrinca.com/opengenomebrowser:latest
+  arx:
+    image: docker.abrinca.com/arx:latest
     env_file:
       - production.env
-    container_name: opengenomebrowser
+    container_name: arx
     ports:
       - "8080:8080" # nginx (HTTP)
       - "4443:4443" # nginx (HTTPS)
     volumes:
-      - ./ogb_container:/data:Z
+      - ./arx_container:/data:Z

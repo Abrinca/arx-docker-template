@@ -1,40 +1,40 @@
 services:
   db:
     image: postgres:17
-    container_name: opengenomebrowser_postgres
+    container_name: arx_postgres
     environment:
-      - POSTGRES_DB=opengenomebrowser_db
-      - POSTGRES_USER=ogb-username
-      - POSTGRES_PASSWORD=ogb-password
+      - POSTGRES_DB=arx_db
+      - POSTGRES_USER=arx-username
+      - POSTGRES_PASSWORD=arx-password
       - PGDATA=/data/postgres
     volumes:
-      - ./ogb_container:/data:z
+      - ./arx_container:/data:z
 
-  opengenomebrowser:
+  arx:
     depends_on:
       - db
-    image: docker.abrinca.com/opengenomebrowser:latest
+    image: docker.abrinca.com/arx:latest
     environment:
       - RUN_NGINX=false
       - RUN_POSTGRES=false
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
-      - POSTGRES_DB=opengenomebrowser_db
-      - POSTGRES_USER=ogb-username
-      - POSTGRES_PASSWORD=ogb-password
+      - POSTGRES_DB=arx_db
+      - POSTGRES_USER=arx-username
+      - POSTGRES_PASSWORD=arx-password
     env_file:
       - production.env
-    container_name: opengenomebrowser_web
+    container_name: arx_web
     volumes:
-      - ./ogb_container:/data:z
+      - ./arx_container:/data:z
 
   nginx:
     depends_on:
-      - opengenomebrowser
-    build: ./ogb_container/nginx
-    container_name: opengenomebrowser_nginx
+      - arx
+    build: ./arx_container/nginx
+    container_name: arx_nginx
     ports:
       - 4443:4443
       - 8080:8080
     volumes:
-      - ./ogb_container:/data:z
+      - ./arx_container:/data:z

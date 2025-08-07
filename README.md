@@ -1,6 +1,6 @@
-# OpenGenomeBrowser Docker Template
+# Arx Docker Template
 
-This repository contains a docker-compose setup for the OpenGenomeBrowser Setup
+This repository contains a docker-compose setup for the Arx Setup
 
 ## How to use it?
 
@@ -8,7 +8,7 @@ Read the instructions [here](https://docs.abrinca.com/).
 
 ### Note on Docker Registry
 
-The OpenGenomeBrowser image is hosted in our private Docker registry at `docker.abrinca.com`. Before starting, log in using:
+The Arx image is hosted in our private Docker registry at `docker.abrinca.com`. Before starting, log in using:
 
 ```bash
 docker login docker.abrinca.com
