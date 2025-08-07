@@ -24,7 +24,7 @@ services:
       - POSTGRES_PASSWORD=arx-password
     env_file:
       - production.env
-    container_name: arx_web
+    container_name: arx
     volumes:
       - ./arx_container:/data:z
 
