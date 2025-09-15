@@ -13,4 +13,4 @@ else
 fi
 
 # run docker-compose
-echo "ready! run 'docker-compose -f production.yaml up'"
+echo "ready! run 'docker compose -f production.yaml up'"
