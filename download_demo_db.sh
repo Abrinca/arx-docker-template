@@ -8,7 +8,7 @@ else
     curl https://cloud.bioinformatics.unibe.ch/index.php/s/HEXfpEcNSQk4jP2/download/folder_structure.tar.xz -o folder_structure.tar.xz
     echo "Unpack demo folder_structure"
     mkdir -p ./arx_container
-    tar -xf folder_structure.tar.xz -C ./arx_container
+    tar -C ./arx_container -xf folder_structure.tar.xz
     rm folder_structure.tar.xz
 fi
 
