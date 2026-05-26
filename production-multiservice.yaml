@@ -10,13 +10,28 @@ services:
     volumes:
       - ./arx_container:/data:z
 
+  redis:
+    image: redis:7-alpine
+    container_name: arx_redis
+    command: ["redis-server", "--appendonly", "yes", "--dir", "/data/redis"]
+    volumes:
+      - ./arx_container/redis:/data/redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
   arx:
     depends_on:
       - db
+      - redis
     image: docker.abrinca.com/arx:latest
     environment:
       - RUN_NGINX=false
       - RUN_POSTGRES=false
+      - RUN_REDIS=false
+      - REDIS_HOST=redis
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
       - POSTGRES_DB=arx_db
