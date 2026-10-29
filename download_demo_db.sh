@@ -18,4 +18,7 @@ else
 fi
 
 # run docker-compose
-echo "ready! run 'docker compose -f production.yaml up'"
+echo
+echo "Ready! Now you may run:"
+echo "docker login docker.abrinca.com"
+echo "docker compose -f production.yaml up"
